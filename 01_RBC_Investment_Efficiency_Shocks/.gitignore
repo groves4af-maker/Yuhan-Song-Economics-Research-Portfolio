@@ -1,0 +1,40 @@
+# macOS system files
+.DS_Store
+
+# R files
+.Rhistory
+.RData
+.Rproj.user/
+
+# Python cache
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Stata log/temp files
+*.smcl
+*.log
+*.tmp
+
+# Matlab backup files
+*.asv
+
+# LaTeX auxiliary files
+*.aux
+*.fdb_latexmk
+*.fls
+*.out
+*.synctex.gz
+*.toc
+*.bbl
+*.blg
+
+# Large or raw data files
+data/raw/
+*.zip
+
+# Personal or marked files
+*feedback*
+*marked*
+*comments*

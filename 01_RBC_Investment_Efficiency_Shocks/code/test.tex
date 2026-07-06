@@ -1,0 +1,897 @@
+\documentclass[12pt]{article}
+    
+
+% -------------------------------------------------------
+% Packages
+% -------------------------------------------------------
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{setspace}
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{titlesec}
+\usepackage{verbatim}
+% -------------------------------------------------------
+% Page Setup
+% -------------------------------------------------------
+\geometry{margin=1in}
+\onehalfspacing
+\setlength{\parskip}{0.6em}
+
+% -------------------------------------------------------
+% Hyperlink colors
+% -------------------------------------------------------
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+    citecolor=blue
+}
+
+% -------------------------------------------------------
+% Custom Commands for DSGE Work
+% -------------------------------------------------------
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Var}{\text{Var}}
+\newcommand{\Cov}{\text{Cov}}
+\newcommand{\dd}{\mathrm{d}}
+
+\newcommand{\ssv}[1]{\bar{#1}}   % steady state variable
+\newcommand{\hatv}[1]{\hat{#1}}  % log-linearized variable
+
+% -------------------------------------------------------
+% Title Setup
+% -------------------------------------------------------
+\title{%
+\textbf{Investment Efficiency Shocks in a Real Business Cycle Framework} \\
+\vspace{0.5em}
+\large Dynamics, Limitations, and Methodological Implications
+}
+\date{}
+% -------------------------------------------------------
+% Begin Document
+% -------------------------------------------------------
+\begin{document}
+\maketitle
+% -------------------------------------------------------
+% 
+% -------------------------------------------------------
+
+\begin{abstract}
+   This essay points out that the standard RBC model cannot explain the excessive volatility of investment relative to output. To solve this problem, we introduce an investment-efficiency shock $\mu_t$ to extend the model. By using calibration and numerical simulations, we compare the dynamic approaches of a TFP-only model with those of a two-shock model. Then we summarize the characteristics of both shocks and get the main findings: although the investment-efficiency shock promotes investment adjustment and raises its volatility, the model still fails to match both the overall level and the relative size of volatility in the real world data. This highlights the limitation and connects it to a broader methodological discussion on parameter calibration versus structural reliability. 
+\end{abstract}
+
+
+
+\section{Introduction}
+A recurring issue in macroeconomics research is whether we can reliably predict the economy’s responses to policy changes. Early empirical models assume fixed expectations, preventing them from capturing how agents adjust their behaviour when policy changes. The Lucas Critique (Lucas, 1976) highlights this key flaw. He argues that the parameters in such models are not structurally stable, and therefore traditional econometric models cannot be used to predict the effects of changes in economic policy (Lucas, 1976). This critique pushed macroeconomics to shift toward structural and micro-founded models. One of the most influential approaches was the Real Business Cycle (RBC) framework developed by  Kydland and Prescott (1982), which introduced rational expectations and optimising behaviour by households and firms.
+
+However, a key limitation of the baseline RBC model is that it cannot reproduce the very high volatility of investment observed in the data. In the post-war U.S. economy,  investment is much more volatile than output. However, consumption is much smoother. Data from FRED show that the standard deviation of investment is about three to four times that of output. When we use the classic RBC model and assume TFP shocks are the only source of economic fluctuations, the resulting investment volatility deviates substantially from what we observe in the real world. Under TFP shocks, the volatility of investment is only slightly higher than that of output, which is far from the pronounced and sensitive investment dynamics observed in the data. Cogley and Nason (1995) state that standard RBC models with only TFP shocks cannot reproduce the volatility and dynamic patterns of investment. The existence of this puzzle implies that relying only on TFP shocks fails to capture all the driving forces of the business cycle.
+
+Thus, a natural question arises: is there a type of shock that directly influences the capital accumulation process, and produces the unusually sensitive investment responses that the TFP–driven RBC model fails to account for?  As a response, macroeconomists have introduced investment-specific technology shocks to better capture the sensitivity of investment to economic disturbances (Greenwood et al., 1988; Justiniano et al., 2010).
+This model extends the standard RBC framework by incorporating investment-efficiency shocks, which directly affect the productivity of investment goods.  
+
+This essay examines whether introducing an investment-efficiency shock can improve the ability of a standard RBC framework to match key business-cycle facts. We build a calibrated RBC model with both TFP and investment shocks, and compare its impulse responses and business-cycle moments with those from these models and with U.S. data for 1970–2024.
+The results show that the investment shock makes investment move faster and become more volatile, but the model still cannot match both the overall level and the relative size of volatility seen in the data.
+This raises a broader point: even if parameters are calibrated carefully, this still does not ensure that the model provides the correct structural explanation. 
+Based on this, we use both the quantitative results and this methodological discussion to show the limits of the frictionless RBC framework.
+
+\section{The Model}
+Consider an infinite-horizon and discrete-time in a closed economy, and the economy is populated by a representative household and a set of firms operating in perfectly competitive markets.
+\subsection{Households}
+Households derive utility from consumption $C_t$ and disutility from supplying labor $N_t$. The utility function is assumed to be separable in consumption and labor, and adopts a logarithmic form for consumption and a convex cost function for labor. We assume the household is rational, which optimally chooses consumption, labor supply, investment, and capital to maximize their lifetime utility.
+
+The representative household maximizes the expected lifetime utility:
+
+\[
+\max_{\{C_t, I_t, N_t, K_t\}_{t=0}^{\infty}}
+\mathbb{E}_{t}\sum_{t=0}^{\infty} \beta^{t}
+\left[
+\ln(C_t) - b \frac{N_t^{1+\varphi}}{1+\varphi}
+\right]
+\]
+\noindent
+
+where $\mathbb{E}_t$ represents the expectation operator. $\beta \in (0,1)$ is the subjective discount factor, represents how much the household value utility in the next period (t+1) relative to the current period. If $\beta$ is close to 1, the household is very patient and values future utility almost as much as today. If $\beta$ is close to 0, the household is very impatient and values current utility much more than future utility. $b > 0$ is the weight on the disutility of labor. A higher value of $b$ means household requires a large increase in consumption to motivate them to supply an extra unit of labor. In contrast, if the value of $b$ is lower, the household is more willing to supply labor for a given level of real wages. $\varphi > 0$ is the inverse of the Frisch elasticity of labor supply. 
+
+The household cannot spend more than they earn. A working household can get a wage rate $W_t$, and $W_tN_t$ means that the payment the household receives for supplying labor. The household owns capital $K_{t-1}$, inherited from period $t-1$. $r_t K_{t-1}$ is the total income the household earns from renting out its capital to firms, where $r_t$ is the real rental rate of capital.
+Subject to the budget constraint:
+\[
+C_t + I_t \le W_t N_t + r_t K_{t-1},
+\]
+
+and the capital accumulation equation:
+\[
+K_t = (1-\delta)K_{t-1} + \mu_t I_t
+\qquad \Longrightarrow \qquad
+I_t = \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}
+\tag{7}
+\]
+$K_t$ is the capital stock available for production in period $t$, where $\delta \in (0,1)$ is the capital depreciation rate. The investment-efficiency shock $\mu_t$ evolves according to an AR(1) process:
+\[
+\ln \mu_t = (1-\rho_\mu)\ln \mu + \rho_\mu \ln \mu_{t-1} + \sigma_\mu \varepsilon_t^\mu,
+\tag{4}
+\]
+where $\rho_\mu \in (0,1)$ measures the persistence of investment-efficiency shocks, 
+$\mu>0$ denotes the steady-state level of investment efficiency, and 
+$\varepsilon_t^\mu \sim i.i.d.\,\mathcal{N}(0,\sigma_\mu^2)$.
+
+This modeling approach is inspired by the work of Greenwood, Hercowitz, and Huffman (1988), who highlight the role of investment-specific shocks ($\mu_t$) as a key driver of business cycle fluctuations. This is an extended version of the basic capital accumulation equation ($K_t = (1 - \delta) K_{t-1} + I_t$). $\mu_t$ is an exogenous shock that shifts the relative price of capital goods versus consumption goods. If $\mu_t > 1$ (a positive shock), it means that for every unit of investment goods $I_t$, the household can acquire $\mu_t$ units of new capital. This represents that it is cheaper to accumulate capital, as a technological improvement in the capital goods production sector. If $\mu_t < 1$ (a negative shock), it means the technology is less efficient, and the household will get less than one unit of new capital for one unit of investment.
+
+Then we substitute $I_t$ into the budget constraint:
+\[
+C_t + \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}
+\le W_t N_t + r_t K_{t-1}
+\]
+
+Since the households are assumed to be rational and they try to maximize their utility, the problem is that the budget is limited. They cannot spend more than they have. So we introduce the Lagrangian $\mathcal{L}$ to solve this constrained optimization problem by turning it into an unconstrained optimization problem. The households' budget constraint is built based on them spending all their available resources. The Lagrange multiplier $\lambda_t$ on the budget constraint represents the marginal utility of relaxing the constraint by one unit.   
+The household Lagrangian is:
+\[
+\mathcal{L}
+=
+\mathbb{E}_{t}
+\sum_{t=0}^{\infty} \beta^{t}
+\left\{
+\ln(C_{t})
+-
+b\frac{N_{t}^{1+\varphi}}{1+\varphi}
++
+\lambda_{t}
+\left[
+W_{t}N_{t}
++ r_{t}K_{t-1}
+- C_{t}
+- \frac{K_{t} - (1-\delta)K_{t-1}}{\mu_{t}}
+\right]
+\right\}.
+\tag{8}
+\]
+
+Then we derive the First-Order Conditions to find the turning point of the objective function.  At the optimum, the marginal benefit of a choice needed to equal its marginal cost.
+
+Consumption:
+
+\[
+\frac{\partial \mathcal{L}}{\partial C_t} = 0 
+\;\Longleftrightarrow\;
+\beta^{t}\!\left(\frac{1}{C_t} - \lambda_t\right) = 0
+\;\Longrightarrow\;
+\frac{1}{C_t} = \lambda_t.
+\tag{9}
+\]
+This condition states that the marginal utility of consumption is exactly equal to the shadow value of relaxing the budget constraint. It ensures that the household is neither over-consuming nor under-consuming relative to their budget.
+
+Labor:
+\[
+\frac{\partial \mathcal{L}}{\partial N_t} = 0 
+\;\;\Longleftrightarrow\;\;
+\beta^{t} \left[
+ -\, b\,\frac{(1+\varphi) N_t^{\,\varphi}}{1+\varphi}
+ + \lambda_t W_t
+\right] = 0
+\;\;\Longrightarrow\;\;
+b N_t^{\varphi} = \lambda_t W_t = \frac{W_t}{C_t}.
+\tag{10}
+\]
+Working requires sacrificing leisure, which is a source of utility. The left-hand side for the FOC for $N_t$ means that the negative change in utility from working one extra hour. However, working also provides income, which can be used for consumption ($C_t$). The middle term of FOC is related to the marginal utility gained from the wage ($W_t$) earned from that extra hour of work. The FOC establishes the optimal choice of labour when the marginal cost of working equals the marginal benefit of working. This implies that the household will optimally choose to work up to the extra point where the last minute work is perfectly compensated by the utility earned from the extra consumption its wage can buy. Then we substitute (9) into $\lambda_t$, getting the marginal rate of transformation between leisure and consumption. It represents the real price of leisure, meaning how many units of consumption the household needs to give up to gain one unit of leisure. 
+
+Capital:
+
+The capital stock $K_t$ is predetermined as the optimal level of investment from the household chosen in period $t-1$ to achieve the capital stock $K_t$, which is a state variable. To ensure the household is indifference between consuming an extra unit today versus saving it to consume more tomorrow, we derive the FOC for $K_t$:
+\[
+\frac{\partial \mathcal{L}}{\partial K_t} = 0 
+\;\;\Longleftrightarrow\;\;
+\beta^{t}\lambda_t\!\left(-\frac{1}{\mu_t}\right)
++ \beta^{t}\mathbb{E}_t \!\left[
+    \beta\, \lambda_{t+1}
+    \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right)
+\right] = 0
+\]
+
+\[
+\Longrightarrow\;
+\lambda_t \frac{1}{\mu_t}
+=
+\beta\, \mathbb{E}_t\!\left[
+    \lambda_{t+1}
+    \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right)
+\right].
+\tag{11}
+\]
+This result combines cost in period $t$ (term with $\lambda_t$) with benefit in period $t+1$ (term with $\lambda_{t+1}$). Since $I_{t-1}$ is an expenditure in period $t-1$ budget constraint, increasing $K_t$ requires increasing $I_{t-1}$, which is a loss of current consumption. However, increasing $K_t$ generates benefits in the next period through rental income and undepreciated capital. The $\lambda_{t+1}$ term measures the marginal utility of the extra income generated by capital in period $t+1$.
+\noindent
+
+By combining the FOCs for $C_t$ (9) and $K_t$ (10), we obtain the Euler Equation, which defines the household's optimal intertemporal consumption and saving decisions:
+\[
+\frac{1}{C_t}
+= \beta \,\mathbb{E}_t \!\left[
+    \frac{\mu_t}{C_{t+1}}
+    \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right)
+\right]
+\tag{12}
+\]
+The Euler Equation shows how the household decides to allocate its income between consumption today ($C_t$) and tomorrow ($C_{t+1}$).
+This condition links today's marginal utility to the expected discounted return on saving, which depends on next period's rental rate $r_{t+1}$ and the investment efficiency shocks.
+
+Left-hand side (LHS) $\displaystyle \frac{1}{C_t}$ is the marginal utility loss from giving up one unit of consumption at time $t$. Right-hand side (RHS) $\displaystyle 
+        \beta \mathbb{E}_t \left[
+        \frac{\mu_t}{C_{t+1}}
+        \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right)
+        \right]$ is the expected discounted marginal utility gain from investing that unit and receiving its return in period $t+1$.
+It introduces the rate of return ($r_{t+1}$) as the price of consuming today versus tomorrow. If the RHS is larger than the LHS, the household would prefer to save more; if smaller, it would prefer to consume more today. At the optimum, the household is indifferent between consuming today and saving to consume tomorrow, where the two sides are equal.
+
+Furthermore, the expected return on capital, which is determined by $r_{t+1}$, $\mu_t$ and $\mu_{t+1}$, plays important roles in this intertemporal trade-off. $r_{t+1}$ is the return on the capital at time $t+1$. An increase in the expected rental rate $E_t[r_{t+1}]$ makes saving more valuable, which raises the RHS. And the household needs to decrease current consumption $C_t$ and increase investment to keep the equality at time $t$. This is the substitution effect, which means future consumption is substituted for current consumption. $\mu_t$ is the current investment efficiency shock. When $\mu_t$ increases, one unit of investment ($I_t$) generates more productive capital ($K_{t+1}$). Investment therefore becomes more efficient, raising the marginal benefit of saving (RHS). As a result, the household decreases $C_t$ and increases investment, accumulating the capital at a lower effective cost due to the temporary high efficiency. $\mu_{t+1}$ is the expected efficiency of investment made at time $t+1$. An increase in $E_t[\mu_{t+1}]$ means the household expects investment to be more efficient in the future. When $\mu_{t+1}$ is higher, the surviving undepreciated capital becomes less valuable in period $t+1$. This is because it can be replaced more efficiently by new investment $I_{t+1}$, which decreases the return on $K_t$. Therefore, the household increases $C_t$ and decreases saving at time $t$, because it expects the investment will be cheaper in the future. This is also a type of substitution effect, substituting investment across the time.
+% -------------------------------------------------------
+% Section 2: Firm Problem
+% -------------------------------------------------------
+\subsection{The Firms}
+In the RBC model, firms operate in a perfectly competitive market. With many firms in the economy, any firm that fails to maximize profits will be driven out of the market by competitive pressures. Given this environment ,the firm’s decision to maximize profit ($\Pi_t$) is based on the fundamental assumption of economic rationality in competitive markets.
+
+The firm's profit function $\Pi_t$ is defined as total revenue minus total costs:
+\[
+\Pi_t = A_t K_{t-1}^{\alpha} N_t^{1-\alpha} \;-\; W_t N_t \;-\; r_t K_{t-1}.
+\tag{13}
+\]
+with $\alpha \in (0,1)$ denoting the elasticity of output with respect to capital. 
+The total factor productivity (TFP) term $A_t$ evolves according to an AR(1) process:
+\[
+\ln A_t = (1-\rho_A)\ln A + \rho_A \ln A_{t-1} + \sigma_A \varepsilon_t^A,
+\tag{6}
+\]
+where $\rho_A \in (0,1)$ measures the persistence of technology shocks, and 
+$\varepsilon_{A,t} \sim i.i.d.\,\mathcal{N}(0,\sigma_A^2)$.
+
+It contains three components. Output revenue: $A_t K_{t-1}^{\alpha} N_t^{1-\alpha}$, produced using capital and labour under a constant-returns-to-scale Cobb--Douglas technology. Labour cost: $W_t N_t$, which is the total wage payment to labour. Capital rental cost: $r_t K_{t-1}$, which is the payment for renting capital from the household.
+
+Because the firm operates under perfect competition, it takes $W_t$ and $r_t$ as given and chooses $N_t$ and $K_{t-1}$ to maximise $\Pi_t$:
+\[
+\max_{\{N_t, K_{t-1}\}} \; \Pi_t 
+= A_t K_{t-1}^{\alpha} N_t^{\,1-\alpha} \;-\; W_t N_t \;-\; r_t K_{t-1}.
+\]
+This implies a firm maximizes profit by choosing inputs until the marginal product of an input equals its marginal cost. We need to make First-Order Conditions, finding the point where this balance is achieved.
+
+Labor demand:
+\[
+\frac{\partial \Pi_t}{\partial N_t} = 0 
+\;\;\Longleftrightarrow\;\;
+(1-\alpha) A_t K_{t-1}^{\alpha} N_t^{1-\alpha-1} - W_t = 0
+\;\;\Longrightarrow\;\;
+W_t = MPL_t=(1-\alpha)\frac{Y_t}{N_t}.
+\tag{14}
+\]
+This FOC determines the firm's optimal demand for labor.
+The firm will continue to hire labour until the marginal product of labour (MPL) is exactly equal to the marginal cost of hiring that unit of labour, which is the real wage rate $W_t$. If $MPL_t > W_t$, hiring one more unit of labour would increase profits; if $MPL_t < W_t$, the firm would reduce hiring to save costs.
+
+Capital demand:
+\[
+\frac{\partial \Pi_t}{\partial K_{t-1}} = 0 
+\;\;\Longleftrightarrow\;\;
+\alpha A_t K_{t-1}^{\alpha-1} N_t^{1-\alpha} - r_t = 0
+\;\;\Longrightarrow\;\;
+r_t = MPK_{t-1} = \alpha \frac{Y_t}{K_{t-1}}.
+\tag{15}
+\]
+This FOC determines the firm's optimal demand for capital. The derivative of the revenue term with respect to $K_{t-1}$ is the marginal product of capital ($MPK_{t-1}$).
+The firm will continue to rent capital until the marginal product of capital (MPK) is exactly equal to the marginal cost of renting that unit of capital, which is the capital rental rate $r_t$.
+These two conditions define the optimal demand for input factors by the firm in a competitive market.
+
+Furthermore, this model assumes the firm uses a Constant-Returns-to-Scale (CRS) production function. This means that if you double both capital and labor, you exactly double the output ($Y_t$).
+
+\noindent From the firm's first–order conditions we obtain:
+
+\noindent Labour cost: 
+\[
+W_t N_t = (1-\alpha)\frac{Y_t}{N_t} N_t = (1-\alpha) Y_t.
+\]
+
+\noindent Capital cost:
+\[
+r_t K_{t-1} = \alpha \frac{Y_t}{K_{t-1}} K_{t-1} = \alpha Y_t.
+\]
+Substituting these total costs into the profit function gives:
+
+\[
+\Pi_t = Y_t - W_t N_t - r_t K_{t-1}.
+\]
+\[
+\Pi_t 
+= Y_t - (1-\alpha)Y_t - \alpha Y_t
+= Y_t - \left[(1-\alpha)Y_t + \alpha Y_t\right]
+= Y_t - Y_t
+= 0.
+\]
+Therefore, under perfect competition and the CRS assumption, we have shown that the firm's total output is exactly exhausted by payments to labour and capital:
+\[
+W_t N_t + r_t K_{t-1} = Y_t.
+\tag{16}
+\]
+This equilibrium called the zero-profit condition, which is a fundamental result in competitive markets with constant returns to scale. It implies that firms earn zero economic profits in equilibrium, as all revenue is paid out to the factors of production.
+% -------------------------------------------------------
+%  Market Clearing
+% -------------------------------------------------------
+\subsection{Market Clearing}
+
+\noindent
+However, an important question remains: how do we ensure that all these decisions are rational and consistent? To guarantee this, we need to impose market-clearing conditions. A market clears when the total amount supplied of a good exactly equals the total amount demanded of that good. The 
+FOCs have already ensured that agents are maximizing their objectives subject to their constraints, while market-clearing  conditions ensure that what households choose to supply is exactly what firms choose to demand. The resulting equilibrium confirms that these optimal choices are rational and consistent across all periods.
+
+The derivation is based on the following four key equations:
+
+\begin{enumerate}
+    \item {Household budget constraint (in equality form):}
+    \begin{equation}
+    C_t + I_t = W_t N_t + r_t K_{t-1}
+    \tag{2}
+    \end{equation}
+
+    \item {Capital accumulation equation:}
+    \begin{equation}
+    K_t = (1-\delta) K_{t-1} + \mu_t I_t
+    \tag{3}
+    \end{equation}
+    \begin{equation}
+I_t = \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}
+\tag{7}
+    \end{equation}
+
+    \item {Firm production function:}
+    \begin{equation}
+    Y_t = A_t K_{t-1}^{\alpha} N_t^{1-\alpha}
+    \tag{5}
+    \end{equation}
+
+    \item {Firm zero-profit condition:}
+    \begin{equation}
+    W_t N_t + r_t K_{t-1} = Y_t
+    \tag{16}
+    \end{equation}
+\end{enumerate}
+
+In a competitive equilibrium, the firm’s zero-profit condition means that all output is paid to the factors of production. Since the household’s income comes entirely from these factor payments, we substitute (16) into (2):
+\begin{equation}
+Y_t = C_t + I_t
+\tag{17}
+\end{equation}
+This means that the amount of goods supplied by the firms equals the amount demanded by the household, which consists of consumption $C_t$ and investment $I_t$.
+However, $I_t$ is an intermediate variable, and its role is to bridge the gap between $K_{t-1}$ and $K_t$. For the dynamics of the model, what really matters is how capital evolves over time, not investment as a separate variable. Since investment is defined by the capital accumulation equation, we can eliminate $I_t$ and express the resource constraint directly in terms of the capital stock.
+Thus, substituting equation (7) into equation (17) gives:
+\begin{equation}
+Y_t = C_t + \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}.
+\tag{18}
+\end{equation}
+This condition ensures that the total supply of goods ($Y_t$) equals total demand ($C_t + I_t$) in every period.
+The reciprocal $\frac{1}{\mu_t}$ is the effective real price of investment. A positive shock to $\mu_t$ (increased efficiency) lowers the real price of investment, meaning the economy needs to divert less current output ($I_t$) to build capital. This frees up resources for consumption ($C_t$), representing a resource-shifting effect driven by the investment shock.
+
+But in equilibrium, output $Y_t$ is determined by the firm's production function, which is produced using capital and labor according to the Cobb-Douglas technology. This gives us an explicit expression for the output.
+Therefore, substituting (5) into equation (18) yields the market clearing condition:
+\begin{equation}
+A_t K_{t-1}^{\alpha} N_t^{1-\alpha}
+= C_t + \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}.
+\tag{19}
+\end{equation}
+
+
+% -------------------------------------------------------
+% Section 4: General Equilibrium
+% -------------------------------------------------------
+\subsection{General Equilibrium Conditions}
+At the earlier steps, we derived the household’s optimal choices, the firm’s optimal input demands and the market-clearing condition. However, each of these results describes only one part of the economy. Although these components are important, by themselves they do not tell us how the economy as a whole behaves.
+To obtain a complete description of the model, it is necessary to put all the individual parts together into one consistent system.
+
+In this model, a general equilibrium with investment shocks is a set of sequences of endogenous allocations and prices 
+\[
+\{C_t, N_t, K_t, Y_t, I_t, W_t, r_t\}_{t=0}^{\infty},
+\]
+which are jointly determined by the exogenous stochastic processes for productivity and investment efficiency,
+\[
+\{A_t, \mu_t\}_{t=0}^{\infty}.
+\]
+These sequences satisfy the following system of equations for all periods $t$:
+
+\begin{align*}
+\text{(GE.1)}\quad 
+& \frac{1}{C_t} = \beta \, \mathbb{E}_t \left[ \frac{\mu_t}{C_{t+1}} \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right) \right]
+&& \text{Household Euler equation} \tag{12}\\
+\text{(GE.2)}\quad
+& b N_t^{\phi} = \frac{W_t}{C_t}
+&& \text{Household labour supply}\tag{10} \\
+\text{(GE.3)}\quad
+& r_t = \alpha A_t K_{t-1}^{\alpha-1} N_t^{1-\alpha}
+&& \text{Firm capital demand } (r_t = MPK_t)\tag{15} \\
+\text{(GE.4)}\quad
+& W_t = (1-\alpha)\, A_t K_{t-1}^{\alpha} N_t^{-\alpha}
+&& \text{Firm labour demand } (W_t = MPN_t) \tag{14}\\
+\text{(GE.5)}\quad
+& Y_t = A_t K_{t-1}^{\alpha} N_t^{1-\alpha}
+&& \text{Technology: production function}\tag{5} \\
+\text{(GE.6)}\quad
+& K_t = (1-\delta)K_{t-1} + \mu_t I_t
+&& \text{Technology: capital accumulation} \tag{3}\\
+\text{(GE.7)}\quad
+& Y_t = C_t + \frac{K_t - (1-\delta)K_{t-1}}{\mu_t}
+&& \text{Goods market clearing (resource constraint)}\tag{18} \\
+\text{(GE.8)}\quad
+& \ln A_t = (1-\rho_A)\ln A + \rho_A \ln A_{t-1} + \sigma_A \varepsilon_t^{A}
+&& \text{Exogenous TFP process}\tag{6} \\
+\text{(GE.9)}\quad
+& \ln \mu_t = (1-\rho_{\mu})\ln \mu + \rho_{\mu} \ln \mu_{t-1} + \sigma_{\mu} \varepsilon_t^{\mu}
+&& \text{Exogenous investment-efficiency process}\tag{4}
+\end{align*}
+
+The general equilibrium of this economy is defined by the set of conditions that simultaneously describe the optimal choices of household, firms, markets, and the evolution of exogenous shocks. These conditions ensure that all agents are rational who optimise given prices, all markets clear. What is more, they respect the laws of motion of technology and investment efficiency.
+
+Households choose consumption, labour supply and savings to maximize their utility. Their optimizational results lead to two important relationships. One is an Euler Equation showing intertemporal consumption choices, and another is a labour supply equation which describes the trade-off between consumption and the disutility of working. The Euler Equation includes the investment efficiency shock ($\mu_t$), which has an influence on how much new capital is generated from each unit of investment. As a result,  the shock alters the return to saving and becomes an additional channel through which intertemporal decisions respond to macroeconomic disturbances.
+
+Firms rent capital and hire labor to maximize their profits in a perfectly competitive market. Their first-order conditions equate the rental rate of capital and the wage to the marginal products of these inputs. These conditions determine factor prices and transmit technology shocks ($A_t$) into the real economy by altering marginal productivity.
+Furthermore, the investment-efficiency shock ($\mu_t$) does not appear here because it affects the formation of new capital. The firm’s production function uses the capital stock $K_{t-1}$, which  is predetermined, and $\mu_t$ only affects next period capital $K_t$, not today's production.
+
+Market clearing requires that total output be allocated between consumption and investment. It is a feasibility constraint to ensure that the choices between households and firms are mutually compatible in equilibrium. Moreover, because investment efficiency is time-varying, the resource constraint links not only to investment expenditure but also to the effective amount of new capital produced through $\mu_t$. Thus, capital accumulation depends both on the depreciation rate ($\delta$) and the current level of investment efficiency ($\mu_t$), which directly influences the economy’s future productive capacity.
+
+Furthermore, both TFP and investment-efficiency follow exogenous AR(1) processes. These stochastic laws of motion generate persistent fluctuations in productivity and the efficiency of capital formation. These shocks affect both the marginal products of inputs and the intertemporal return to investment, which shapes the overall dynamics of the economy.
+% -------------------------------------------------------
+% Section 5: Steady State
+% -------------------------------------------------------
+\subsection{The Steady State}
+The general equilibrium conditions describe how the households and firms interact in the short run. But what happens in the long run? To answer this, computing the steady state allows us to establish the model’s long run equilibrium when all shocks have dissipated.
+
+The Steady State is an equilibrium in which all endogenous variables attain constant values and do not change over time. In this state, expectations are realized, and the exogenous shocks $A_t$ and $\mu_t$ return to their long-run means ($A=1, \mu=1$).
+
+Consumption, capital, and labour all settle at constant level, and shocks return to their long run averages. Because of this, we no longer need time subscripts or expectation operators. Thus, we obtain the steady-state conditions by removing the time subscripts and the expectation operator ($\mathbb{E}_t$) from the general equilibrium conditions (GE.1 - GE.7), and substituting $A=1$ and $\mu=1$.
+At steady state:
+\[
+C = C_{t} = C_{t+1}, \quad K = K_t = K_{t-1}, \quad \mu = 1, \quad A=1.
+\]
+\subsubsection{Euler Equation for Capital (GE.1 $\Longrightarrow$ SS-1)}
+We begin with the household’s intertemporal optimality condition because it  provides the demand-side condition for the return on capital. The household determines the required return on capital through its saving decision, and the Euler equation tells us what the long run interest rate must be to keep the household indifferent between consuming today and consuming tomorrow.
+The steady-state Euler equation is
+\[
+\frac{1}{C}\frac{1}{\mu}
+= 
+\beta \frac{1}{C}\left( r + \frac{1-\delta}{\mu} \right).
+\]
+
+Substituting $\mu = 1$ and cancelling $\frac{1}{C}$ on both sides, we obtain:
+\[
+1 = \beta \left( r + 1 - \delta \right).
+\]
+
+Solving for $r$ gives the steady-state real return on capital:
+\[
+r = \frac{1}{\beta} - (1 - \delta).
+\tag{20}
+\]
+This equation is one of the most important results in macroeconomics, which is known as the Modified Golden Rule\footnote{%
+In the RBC/Ramsey model, the steady-state Euler condition implies \( r = \frac{1}{\beta} - (1-\delta) \). Because the optimal return on capital satisfies \( r = MPK \), this expression can be written as \( MPK = \frac{1}{\beta} - (1-\delta) \). Defining the rate of time preference as \( \rho = \frac{1-\beta}{\beta} \) allows us to express \( \frac{1}{\beta} = 1 + \rho \), and substituting this identity yields the steady-state condition \( MPK = \rho + \delta \). This is precisely the Modified Golden Rule originally derived by Phelps (1961).%
+} (Phelps, 1961) for optimal capital accumulation. Since the discount factor satisfies \(\beta <1\) (meaning that the household prefers current consumption to future consumption ), it follows that \(1/\beta >1\). Consequently, the required gross return on capital \((r + 1 - \delta)\) would be greater than 1, which aims to compensate households for postponing current consumption. 
+This equation shows the household’s condition for intertemporal indifference, which equates the marginal utility cost of sacrificing one unit of consumption today to the discounted marginal utility gain from an additional unit of capital tomorrow.
+
+\subsubsection{Firm's Capital Demand (GE.3 $\Longrightarrow$ SS-2)}
+We now turn to the supply side of the economy. Firms choose how much capital to rent in order to maximize profits. These firms hire capital up to the point where the cost of renting an extra unit of capital equals the additional output that this unit of capital can generate.
+In other words, the rental rate $r$ must equal the marginal product of capital (MPK). 
+Setting $A = 1$, we have
+\[
+r = \alpha (1) K^{\alpha - 1} N^{1 - \alpha}.
+\]
+
+Using the production function
+\[
+Y = K^{\alpha} N^{1-\alpha} \qquad \text{(SS-5)},
+\]
+we obtain
+\[
+K^{\alpha - 1} N^{1 - \alpha} = \frac{Y}{K}.
+\]
+
+Therefore, the steady-state capital rental rate is
+\[
+r = \alpha \frac{Y}{K}.
+\tag{21}
+\]
+This equation states that the rental rate of capital $r$ needs to equal the marginal product of capital in the steady state. The term $\frac{Y}{K}$ captures how much output is produced per unit of capital, which measures the scarcity and effectiveness of capital. The steady-state return to capital is higher when the economy produces more output per unit of capital and lower when the economy is more capital intensive (i.e. when $K$ is large relative to $Y$). Moreover, the proportionality factor is the capital income share $\alpha$ from Cobb-Douglas production function. 
+\subsubsection{Capital--Output Ratio ($\frac{K}{Y}$)}
+After determining the household side and firm side, we can now close the system. For the capital market clearing in the steady-state, the price of capital demanded by the firm must equal the return on capital required by the household.
+
+Combining (20) and (21), we obtain:
+\[
+\frac{1}{\beta} - (1-\delta)
+= 
+\alpha \frac{Y}{K}.
+\]
+
+Thus, the steady-state capital--output ratio is
+\[
+\frac{K}{Y}
+=
+\frac{\alpha}{\frac{1}{\beta} - (1-\delta)}.
+\tag{22}
+\]
+
+This equation shows how much capital the economy chooses to hold relative to its annual production.
+The steady-state capital--output ratio increases when capital is more productive ($\alpha$ larger) and decreases when households require a higher return to save (lower $\beta$, higher $\delta$). It reflects the point where the firm’s MPK equals the household’s required net return on capital.
+
+\subsubsection{Capital Accumulation (GE.6 $\Longrightarrow$ SS-4)}
+However, after determining the steady-state capital–output ratio, what is about the steady-state level of capital?
+The ratio $\frac{K}{Y}$ only tells us how capital relates to output, but it does not determine the value of investment.
+
+In the steady state, capital is constant over time, so $K_t = K_{t-1} = K$.  
+Setting $\mu = 1$, the capital accumulation equation becomes
+\[
+K = (1-\delta)K + 1 \cdot I.
+\]
+
+Solving for steady-state investment,
+\[
+I = \delta K.
+\tag{23}
+\]
+This result shows that the economy only invests enough to replace depreciated capital in the long run.
+There is no net capital accumulation, and the capital stock remains constant over time.
+Therefore, investment equals $\delta K$, meaning that the economy exactly offsets the depreciation of the capital stock each period.
+
+\subsubsection{Goods Market Clearing (Resource Constraint) (GE.7 $\Longrightarrow$ SS-5)}
+After that, a new question arises: what is the steady-state level of consumption?
+We use the goods market-clearing condition to determine steady-state consumption because no other equilibrium condition specifies how output is allocated between consumption and investment.
+
+
+Substituting $I = \delta K$ (or using the original GE.7 equation with $\mu = 1$ and 
+$K_t = K_{t-1} = K$), we obtain
+\[
+Y = C + \frac{K - (1-\delta)K}{1}.
+\]
+
+This simplifies to
+\[
+Y = C + \delta K.
+\]
+
+Therefore, steady-state consumption is given by
+\[
+C = Y - \delta K.
+\tag{25}
+\]
+That is in the steady state, consumption equals total output minus replacement investment $\delta K$. 
+This equation shows how much of the economy's output is devoted to consumption after accounting for the investment needed to maintain the capital stock. This is because investment only offsets capital depreciation in steady state.
+\subsubsection{Labour ($N$)}
+Then, we can determine the steady-state level of labour supply.
+Combining the household's labour supply condition (GE.2) with the firm's labour demand
+condition (GE.4), we eliminate $W$.
+
+From the intratemporal condition,
+\[
+b N^{\varphi} C = W \qquad \text{(SS-6)}
+\]
+
+From the firm's first-order condition for labour,
+\[
+W = (1-\alpha) K^{\alpha} N^{-\alpha} = (1-\alpha)\frac{Y}{N} 
+\qquad \text{(SS-7)}
+\]
+
+Substituting SS-7 into SS-6 and using $C = Y - \delta K$, we obtain:
+\[
+b N^{\varphi}(Y - \delta K) = (1-\alpha)\frac{Y}{N}.
+\]
+
+Multiplying both sides by $N$ gives:
+\[
+b N^{\varphi+1}(Y - \delta K) = (1-\alpha)Y.
+\]
+
+Dividing by $Y$,
+\[
+b N^{\varphi+1}\left(1 - \delta \frac{K}{Y}\right) = (1-\alpha).
+\]
+
+Since the ratio $\frac{K}{Y}$ is already determined in SS-3, we can solve for steady-state labour:
+\[
+N = \left(
+\frac{1-\alpha}{\,b\left(1 - \delta \frac{K}{Y}\right)}
+\right)^{\frac{1}{1+\varphi}}.
+\tag{26}
+\]
+In steady state, labour supply $N$ is determined by three key factors. 
+First, a higher labour income share $(1-\alpha)$ raises the marginal return to working, which increases the household’s incentive to supply labour. 
+Second, a larger labour disutility parameter $b$ makes working more costly in utility terms, thereby reducing labour supply. 
+Third, a higher steady-state consumption ratio $(1-\delta \frac{K}{Y})$ increases the effective marginal benefit of working, which leads to a higher $N$. 
+
+\subsubsection{Steady-State Wage ($W$)}
+Although labour supply determines how much households choose to work, the model also requires the equilibrium return to labour.
+We next derive the steady-state wage $W$.
+
+Using the firm's labour demand condition (SS-7), we obtain:
+\[
+W = (1-\alpha)\frac{Y}{N}.
+\tag{27}
+\]
+This expression shows that the steady-state wage equals the labour share of output $(1-\alpha)$ times average labour productivity $\frac{Y}{N}$. It describes how much income households earn from supplying labour. Computing $W$ is necessary because it enters the household’s budget constraint and determines total income, which in turn affects consumption, saving, and investment decisions. Therefore, solving for the wage completes the steady-state allocation and allows the model to be fully closed before log-linearisation and simulation.
+
+
+% -------------------------------------------------------
+% 
+% -------------------------------------------------------
+\section{Calibration}
+The model is calibrated using standard parameter values from the real business cycle literature and U.S. macroeconomic data, with each period corresponding to a quarter. The baseline calibration( summarized in Table 1 ) reports the key steady-state ratios and dynamic properties of the U.S. economy.
+
+\begin{table}[h!]
+\centering
+\caption{Baseline Calibration}
+\begin{tabular}{l c l}
+\hline\hline
+\textbf{Parameter} & \textbf{Value} & \textbf{Description} \\
+\hline
+$\beta$      & 0.99  & Discount factor (quarterly) \\
+$\alpha$     & 0.33  & Capital share in production \\
+$\delta$     & 0.025 & Capital depreciation rate (quarterly) \\
+$\varphi$    & 1     & Inverse of Frisch elasticity of labour supply \\
+$\rho_A$     & 0.98  & Persistence of TFP shock \\
+$\rho_{\mu}$ & 0.98  & Persistence of investment efficiency shock \\
+$sd_A$       & 0.01  & Standard deviation of TFP shock \\
+$sd_{\mu}$   & 0.01  & Standard deviation of investment efficiency shock \\
+\hline\hline
+\end{tabular}
+\end{table}
+
+The choice of parameters are standard. Kydland and Prescott (1982) first use a quarterly discount factor of $\beta=0.99$ to ensure that the household's subjective discount rate matches the real interest rate observed in the data. A value of $\beta$ close to 1 is required in quarterly models to match an annual real interest rate of approximately 4 percent in U.S. data. And Hansen (1985) states that the rate of depreciation of capital $\delta$ per quarter is set equal to 0.025, meaning an annual rate of depreciation of 10 percent. He points out that is a good compromise given that different types of capital depreciate at different rates (Hansen, 1985).
+\par
+One of the key parameters ($\alpha$) in the calibration is the capital income share is set to 0.33. In the Cobb--Douglas production function $Y = A K^{\alpha} L^{1-\alpha}$, the parameter $\alpha$ can be directly interpreted as the share of capital in national income. Kaldor (1961) argues that the shares of income received by labour and capital in the national income are roughly constant over long periods of time. What is more, subsequent empirical studies of long-run national income find that the average capital income share is close to one-third. In particular, Gollin (2002) states after correcting for the labour component of self-employment income, the capital share remains around this value. This value is also broadly consistent with the capital income share reported in U.S. national income accounts (BEA/NIPA).
+
+Furthermore, the inverse of Frisch elasticity of labour supply is set to one, which is a common value used in the RBC literature (e.g., Smets and Wouters, 2007). It measures the percentage of the family's labor supply (\(L\)) to change when the actual wage changes by 1\%, keeping the marginal utility of consumption unchanged. It is useful for the model to retain flexibility in the intertemporal substitution of labour.
+
+The persistence parameter is set to $\rho = 0.98$, indicating that both TFP and investment shocks are highly persistent. This means that a shock of one unit today has 0.98 of its effect in the next period. This value lies within the standard range, typically between 0.95 and 0.99 for quarterly data in macroeconomic literature.
+
+The standard deviation of the TFP shock and the investment efficiency shock are set to 1\%. Meaning that in each quarter, the typical exogenous disturbances to productivity and investment efficiency deviate from their steady-state levels by approximately 1\%. This value is consistent with the calibration settings in mainstream DSGE literature. It not only avoids generating excessive volatility when shocks are large, but also ensures that the simulated model matches the output and investment volatility observed in U.S. data.
+
+% -------------------------------------------------------
+% empirical analysis
+% -------------------------------------------------------
+
+\section{Main Results}
+
+To start with our analysis, we first begin with the real world data in FRED.\footnote{The data are obtained from the Federal Reserve Economic Data (FRED). All series are transformed into quarterly percentage growth rates, and the figure is constructed by myself. Source: \url{https://fred.stlouisfed.org/}.} Figure 1 shows the quarterly growth rates of U.S. output (Y), consumption (C ), and investment (I) from 1970Q1 to 2024Q1. During the entire sample period, the trend of investment growth shows substantially larger fluctuations than both output and consumption. Its growth rate frequently swings by as much as ±10\% or even higher, and the direction of volatility movement changes more suddenly and frequently. In contrast, the growth rate of output also varies over the business cycle but keeps within a much narrower range. Moreover, consumption growth is the most stable and smooth of the three, with relatively small and infrequent deviations.
+
+\begin{figure}[H]
+    \centering
+    \captionsetup{labelformat=empty}
+    \caption{Figure 1. Quarterly Growth Rates of Y, C, I (\%)}
+    \includegraphics[width=0.85\textwidth]{Rplot.pdf}
+    \label{fig:growth_rates}
+\end{figure}
+
+This clear comparison highlights a key empirical fact: investment is consistently the most volatile variable, while consumption is the smoothest, and output is in between. Such characteristics are not only evident in this figure, but also highly consistent with the general findings of macroeconomic literature. Therefore, it provides a natural starting point for our analysis: which shocks can explain why investment fluctuates so much in the data?
+
+To further verify that the volatility of investment is significantly greater  than consumption and output, we first use the Structural VAR (SVAR) model to identify an investment shock. Figure 2 reports the impulse response functions from this SVAR. Since a VAR can only capture statistical correlations and cannot directly provide structural economic shocks, we adopt a Cholesky decomposition (recursive ordering)\footnote{We estimate a three-variable SVAR and use a Cholesky decomposition with the ordering $\mathbf{Y}_t=[Y,I,C]^T$. This ordering implies the structural shocks $\boldsymbol{\epsilon}_t=[\epsilon_Y,\epsilon_I,\epsilon_C]^T$, where output is the most exogenous variable. The investment shock $\epsilon_I$ can respond to output shocks in the same period but not to consumption shocks. Therefore, the second shock is interpreted as the exogenous investment efficiency shock.} to identify the investment shock. In particular, the sequence reflects how quickly each variable can respond to shocks. We set the ordering as investment (I) → output (Y) → consumption (C). This means that investment is allowed to respond immediately to all shocks, output adjusts slowly and consumption is the smoothest. It is reasonable to place the investment as the first, because the firms can change it quickly. Output is affected by the production progress, which is placed in the middle. Consumption is placed last because it is the slowest variable.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.85\textwidth]{SVAR_Standalone_IRF.pdf}
+    \caption{SVAR Impulse Responses to an Investment Shock (90\% Confidence Interval)}
+    \label{fig:svar_irf}
+\end{figure}
+As shown in Figure 2, after an investment shock, the growth rate of output immediately shows the largest and most visible jump, and gradually returns to its steady-state. The 90\% confidence interval does not include zero in the initial period, meaning that this reaction is statistically significant in the short run. What is more, investment also increases on impact, though its response is smaller and more volatile. However, the shock does not have a statistically significant positive effect on consumption.
+
+Overall, the SVAR result provides us a baseline for the real world data: an investment shock generates a positive but short-lived effect on both investment and output, while the consumption is almost ignored.  However, the SVAR can only show us how the variable moves in the data, and they cannot explain why it responds in this way.
+
+Therefore, we next turn to the theoretical model and simulate the RBC framework under both a TFP shock and an investment-efficiency shock by Dynare. 
+\subsection{Impulse Responses Analysis: Comparing a 1\% Investment Shock with a 1\% TFP Shock}
+
+Both shocks are assumed to follow AR(1) process with persistence $\rho=0.98$ and standard deviation $sd=0.01$, consistent with the baseline calibration. The impulse responses are displayed in a 3x3 grid, covering Output, Consumption, Investment, Capital, Labour, MPK, Interest Rate, Wage, and the shock itself.
+\begin{footnotesize}
+
+\noindent In this RBC framework, the marginal product of capital (MPK) and the real interest rate are represented by the same variable $r_t$. This equivalence follows from competitive equilibrium. On the production side, firms rent capital from households and choose $K_{t-1}$ such that its marginal product equals the rental rate, implying $r_t = MPK_t = \alpha A_t K_{t-1}^{\alpha-1} N_t^{1-\alpha}$. On the household side, capital is the only savings instrument, and the Euler equation shows that the intertemporal return on saving is precisely the rental rate paid by firms: $\frac{1}{C_t} = \beta E_t \left[ \frac{\mu_t}{C_{t+1}} \left( r_{t+1} + \frac{1-\delta}{\mu_{t+1}} \right) \right]$. Therefore, $r_t$ plays a dual role as both the marginal product of capital and the real interest rate. With no bonds or financial assets in the model, the real interest rate is exactly the return on capital. For this reason, the impulse response for the rental rate $r_t$ fully captures the dynamics of both the marginal product of capital and the real interest rate in the model.
+\end{footnotesize}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{dsge22222.pdf}
+    \caption{Impulse Response Functions to a 1\% Negative Shock}
+    \label{fig:dsge_irf}
+\end{figure}
+\subsubsection{Investment-Efficiency Shock and TFP Shock: Consumption}
+For general equilibrium transmission of the investment shock, an initial impact is that a 1\% decline in investment efficiency directly reduces the effectiveness of transforming investment goods into capital. As shown in Figure 3, investment falls sharply because of this influence. The reason is $\mu_t$ enters the capital law of motion by multiplication $K_{t} = (1-\delta) K_{t-1} + \mu_t I_t$, which reducing the marginal return of investing today.
+
+A negative investment-efficient shock ($\mu_t \downarrow$) reduces the effectiveness of turning investment goods into new capital. The household therefore faces lower future returns from saving, weakening the incentive to defer consumption. The shock also reduces the marginal product of capital because lower future capital leads to lower future rental rates and therefore a lower real return to saving. As a result, capital becomes less productive in the short run.
+
+Because future returns fall, households experience a negative wealth effect: they initially reduce consumption with lower expected lifetime income. At the same time, the intertemporal substitution effect works in the opposite direction. Since the return on capital falls ($r_t \downarrow$ in the $\mu$-shock IRF), saving become less attractive, inducing households to shift some future consumption toward the present.
+
+These two effects interact. The negative wealth effect dominates on impact, which means consumption jumps sharply. However, as $r_t$ keeps below its steady-state, households gradually reduce saving in the future, allowing consumption to recover over time. As long as the rental rate stays depressed, consumption slowly moves toward its steady-state path. Furthermore, because the investment shock is highly persistent ($\rho_{\mu} = 0.98$), the recovery is gradual and incomplete for many periods.
+
+In contrast, a negative TFP shock ($A_t \downarrow$) reduces the marginal product of both labour and capital, lowering wages and real return. This reduction reduces the wealth effect, which pushes consumption downward. Even though there is a temporary rise in $r_t$ early in the adjustment, households save more by reallocating spending from present to the future. The intertemporal substitution effect strengthens the initial decline in consumption.
+
+Taken together, the two shocks reflect different mechanisms shaping consumption dynamics.  A $\mu$ shock works through future capital return, causing consumption to fall because saving becomes less attractive. In contrast, a TFP shock mainly affects current production capacity and labour income, amplifying the initial drop through both wealth and substitution channels. As a result, the $\mu$ shock produces a milder drop in consumption, but the TFP shock yields a deeper and more persistent effect.
+\subsubsection{Investment and Capital Responses to $\mu$ and TFP Shocks}
+
+A lower $\mu_t$ reduces the efficiency of producing new capital, and  thus investment drops sharply. Households immediately scale back investment because the same amount of spending now generates less capital accumulation. As investment falls, the marginal product of capital rises slightly, but this effect is dominated by the persistent deterioration in capital accumulation. Investment slowly rises back toward its steady-state level as $\mu_t$ mean reverts. After that, depreciation begins to dominate and capital slowly returns toward steady state. This slow adjustment leads to rental rates below their steady-state values for a long period. 
+
+Furthermore, a negative TFP shock reduces the marginal product of capital and labour, lowering both wages and the rental rate of capital. Because profitability declines, investment drops as well. As capital gradually declines, MPK rises, and this slow improvement in returns allows investment to move back toward its steady-state value. However, because capital adjusts slowly by nature, the recovery is gradual and takes a long time. At some point, the increase in MPK offsets the negative effect of low productivity, which causes investment to return to steady-state levels. Then, capital begins to rebuild toward a steady state.
+
+Although both shocks lead to an immediate contraction in investment, the underlying mechanisms are differ. A $\mu$ shock affects the efficiency of capital accumulation itself, making each unit of investment less productive. In contrast, a TFP shock reduces the productivity of existing inputs, lowering the marginal product of capital and discouraging investment through reduced profitability.
+Therefore, a $\mu$ shock leads to a deeper and more prolonged drop in capital, but a TFP shock has a  smoother and more gradual effect. In the long run, the responses of capital to these two shocks are similar.
+\subsubsection{Hours and Wages under $\mu$ and TFP Shocks}
+Furthermore, a negative $\mu$ shock reduces the efficiency of new investment, which lowers the future marginal product of capital. This reduces labour demand and puts downward pressure on wages. 
+Based on this, households face two opposing effects, one is substitution effect and the other is income effect.
+The substitution effect means lower wages reduce the return to working, encouraging households to supply fewer hours, and the income effect means that lower lifetime income leads households to work more to compensate for lost purchasing power.
+In fact, the substitution effect dominates here. This is because the sharp drop in real wages make labour relatively less attractive, leading hours to fall immediately.
+As the shock fades and $\mu$ gradually returns to steady state, wages begin to recover. The income effect then becomes relatively stronger, stabilizing hours and bringing them gradually back toward steady state.
+
+At the same time, a negative TFP shock decreases the marginal product of labor and capital, reducing labor demand and pushing down real wages.
+This implies that the supply of working hours declines, and thus firms scale back hiring while households face a lower return to supplying labour. Households again face conflicting substitution and income effects. Initially, the substitution effect dominates: a lower wage makes leisure relatively cheaper, causing households to reduce hours worked.
+With the recovery of productivity, the income effect gains importance and hours move back toward steady state.
+
+In comparison, a $\mu$ shock lowers wages by reducing investment efficiency, which slows future capital accumulation and gradually weakens labor demand. In contrast, a TFP shock reduces wages more sharply because it directly decreases the current marginal product of labor. Therefore, the wage rate response under a $\mu$ shock is smoother than under a TFP shock. Thus, the IRF shows that the wage rate ($W$) decreases more quickly under a TFP shock (red line), whereas the decline is milder but more persistent under a $\mu$ shock (blue line).
+\subsubsection{Output Dynamics Following Investment-Efficiency and TFP Shocks}
+A negative $\mu$ shock also has bad effects on effective capital formation. Because of lower productive capacity in the future, firms cut investment immediately, and this leads to output fall. Lower investment today leads to slower capital accumulation over time. As a result, both capital services and the marginal product of capital decline, further reducing firms’ willingness to produce. What is more, labour demand is relevant to capital productivity, so the working hours also decrease. This makes output get an additional fall. Moreover, the decline in output is larger than the fall in $\mu$ itself. This is because reduced investment and lower labor input reinforce the initial shock. As $\mu$ gradually returns to steady state, investment recovers, capital slowly rebuilds, and output rises back toward its long-run level.
+
+Because of the same reason we mentioned before, a negative TFP shock also affects output dropping immediately. Firms produce less with the same inputs, and both labour demand and investment fall. Lower consumption, investment, hours, wages, and rental rates reinforce the decline in productivity, causing output to fall more than the decrease in TFP alone.
+
+As productivity recovers, higher labor and capital inputs amplify the effect of rising TFP and help output return to its steady-state level. This follows from the production function $Y_t = A_t K_t^{\alpha} N_t^{1-\alpha}$, where an increase in productivity raises the marginal products of both capital and labor, given respectively by $\frac{\partial Y_t}{\partial K_t} = \alpha A_t K_t^{\alpha-1} N_t^{1-\alpha}$ and $\frac{\partial Y_t}{\partial N_t} = (1-\alpha) A_t K_t^{\alpha} N_t^{-\alpha}$.  As $A_t$ increases, more capital or labor makes output rise by a larger amount.
+
+Through comparing a $\mu$ shock with a TFP shock, one is focused on affecting current production technology directly, leading to a smoother but persistent fall in output. Another affects current production technology directly, causing output to fall more sharply on impact. In the IRFs, output under the TFP shock (red line) drops faster and deeper, while the decline under the $\mu$ shock (blue line) is milder but longer-lasting.
+
+\subsection{Quantitative Evaluation of the Model Against U.S. Data}
+\subsubsection{Data and Model Comparison: Business Cycle Moments}
+After examining the general equilibrium transmission channels of both the investment-efficiency shock and the TFP shock, it is important to know whether these mechanisms match real world data. We compare the model’s volatility of output, consumption, and investment to U.S. data in this section.
+By analysing the model with only TFP shocks and the model with both shocks, we can evaluate which version better explains the size and movement of macroeconomic fluctuations observed in practice.  
+
+
+\begin{table}[H]
+\centering
+\caption{A Comparison of Business Cycle Moments: Data vs RBC Models}
+\begin{tabular}{lcccc}
+\hline\hline
+ & $\sigma(\log Y_t)$ & $\sigma(\log C_t)$ & $\sigma(\log I_t)$ & $\rho_1(\log Y_t)$ \\
+\hline
+{U.S. Data (1970--2024)} 
+ & 1.0895 & 1.0826 & 4.0697 & 1.0000 \\[4pt]
+
+{RBC Model (TFP-only)}
+ & 1.0793 & 0.8356 & 3.0674 & 0.9872 \\
+
+{RBC Model (TFP + Inv. Shock)}
+ & 8.3569 & 7.4132 & 15.4586 & 0.9882 \\
+\hline\hline
+\end{tabular}
+\begin{flushleft}
+\footnotesize Notes: Standard deviations are unconditional quarterly volatilities from the data and from 1st-order approximated RBC models. Autocorrelation $\rho_1(\log Y_t)$ is the first-order autocorrelation of log output. 
+\end{flushleft}
+\end{table}
+
+Table 2 compares the unconditional standard deviations from the data with the corresponding moments generated by the two model specifications. Let the standard deviation of a variable $X$ in the data be denoted by $\sigma_X^{data}$, and the moments from the TFP-only and TFP+investment-shock models be $\sigma_X^{TFP}$ and $\sigma_X^{TFP+\mu}$. In the U.S. data, investment is much more volatile than output and consumption, following the typical pattern $\sigma_I^{data} \gg \sigma_Y^{data} \approx \sigma_C^{data}$. Quantitatively, the values are $\sigma_I^{data} \approx 4.07$, $\sigma_Y^{data} \approx 1.09$, and $\sigma_C^{data} \approx 1.08$. This means investment is about $\frac{\sigma_I^{data}}{\sigma_Y^{data}} \approx 3.74$ times more volatile than output, while consumption volatility is almost the same as output, with $\frac{\sigma_C^{data}}{\sigma_Y^{data}} \approx 0.99$.
+
+For the TFP shock RBC model, the volatilities of output, consumption and investment are approximately $\sigma_Y^{TFP} \approx 1.08$, $\sigma_C^{TFP} \approx 0.84$, and $\sigma_I^{TFP} \approx 3.07$. These moments imply volatility ratios such as $\frac{\sigma_I^{TFP}}{\sigma_Y^{TFP}} \approx 2.84$ and $\frac{\sigma_C^{TFP}}{\sigma_Y^{TFP}} \approx 0.78$. 
+
+Compared the TFP shock with the U.S. data, the model clearly produces much volatility in both output and investment, since $\sigma_Y^{TFP} \approx 0.99\,\sigma_Y^{data}$ and $\sigma_I^{TFP} \approx 0.75\,\sigma_I^{data}$. However, the investment output volatility ratio is still low ( because $\frac{\sigma_I^{TFP}}{\sigma_Y^{TFP}} \approx 2.84 < \frac{\sigma_I^{data}}{\sigma_Y^{data}} \approx 3.74$.), meaning the model cannot match the fact that investment is much more volatile than output in the data. 
+This problem is consistent with the well-known limitation of standard RBC models (Cogley and Nason, 1995), where TFP shocks alone cannot generate the strong and fast movements in investment seen in real-world business cycles.
+
+When the investment-efficiency shock is added to the model, the volatility patterns change in a more realistic way. The model with both shocks generates output volatility of $\sigma_Y^{TFP+\mu} \approx 8.36$, consumption volatility of $\sigma_C^{TFP+\mu} \approx 7.41$, and investment volatility of $\sigma_I^{TFP+\mu} \approx 15.46$. These values are still higher than in the data. What is more, the investment–output volatility ratio is $\frac{\sigma_I^{TFP+\mu}}{\sigma_Y^{TFP+\mu}} \approx 1.85$. 
+
+Although the model with the investment-efficiency shock improves several dynamic features of the RBC framework, it does not generate a better investment–output volatility ratio. In fact, the TFP-only model produces a ratio of $\frac{\sigma_I^{TFP}}{\sigma_Y^{TFP}} \approx 2.84$, which is closer to the empirical value of $\frac{\sigma_I^{data}}{\sigma_Y^{data}} \approx 3.74$ than the ratio implied by the two-shock model, $\frac{\sigma_I^{TFP+\mu}}{\sigma_Y^{TFP+\mu}} \approx 1.85$. This means that adding the $\mu$ shock reduces the relative volatility of investment.
+The reason is that the $\mu$ shock raises the volatility of both investment and output, but it increases output volatility proportionally more. As a result, the relative volatility of investment declines even though the absolute level of investment volatility increases. 
+
+Overall, the comparison in Table~2 shows that neither specification is able to fully match
+the joint behaviour of output, consumption and investment in the U.S. data. 
+These mismatches highlight important limitations of the simple RBC structure used in this essay.  
+Although adding the investment-efficiency shock improves the acceleration of investment dynamics,
+the model is still unable to simultaneously match both the level and the relative size of 
+business-cycle volatility. 
+
+The presence of these limitations naturally raises a broader methodological question: 
+to what extent can calibration-based DSGE models provide reliable quantitative explanations of 
+real-world fluctuations? This issue has been at the centre of a long debate between 
+calibration and estimation approaches.
+
+\subsubsection{Calibration–Estimation Debate and Implications for Model Reliability}
+
+The long periods of debate between calibration and estimation methods in macroeconomic modelling reflect a deeper tension between theoretical rigour and empirical fit. In response to the Lucas Critique (1976), Kydland and Prescott (1982) promote the calibration method by constructing a dynamic and micro-based mode. They introduce setting key parameters using long-run averages and evaluating the model by comparing its business cycle moments to the data (Kydland and Prescott, 1982). Prescott (1986) strengthen this methodology, stating “theory ahead of measurement”. He emphasizes explaining macroeconomic fluctuations by the use of calibrated model economies, laying the theoretical foundation for the calibration approach (Prescott, 1986).
+
+In contrast, the estimation approaches try to infer model parameters directly from the data, using econometric techniques such as maximum likelihood, the generalized method of moments, or Bayesian inference. Based on this, Hansen and Heckman (1996) criticise the Kydland–Prescott style of calibration. They argue that calibration lacks a solid statistical foundation because it often avoids formal estimation and ignores sampling uncertainty (Hansen and Heckman, 1996). They emphasise it is necessary to combine economic theory with rigorous econometric identification, ensuring it is trusted at an empirical level (Hansen and Heckman, 1996).  Kim and Pagan (1999) also argue that DSGE models rely too much on calibration and therefore lack proper statistical testing and empirical credibility.
+
+However, some scholars question both calibration and estimation. Fagiolo and Roventini (2012) argue that the calibration–estimation debate in DSGE models is fundamentally flawed because identification problems make estimation unreliable, and Bayesian methods effectively reduce calibration when likelihoods are flat. These methodological conflicts focus on how to set parameters, but ignore that even if the parameters are determined, how can we verify that the structural explanation of the model is correct? 
+
+Christiano et al. (2005) combine calibration and Bayesian estimation in their DSGE model, highlighting the complementary roles of the two approaches in capturing macroeconomic dynamics. However, improved fit with the parameter estimation only tells us “what is the parameter value”, rather than guaranteeing correct structural interpretation. This question is particularly when we add new shocks like investment disturbances.
+
+Therefore, the calibration–estimation debate highlights important challenges in ensuring that DSGE models provide reliable quantitative explanations of real-world fluctuations. While calibration offers theoretical consistency, estimation provides empirical rigor. However, neither approach fully resolves the fundamental issue of structural validity. This suggests that future research should focus not only on parameter determination but also on developing robust methods to validate the underlying mechanisms driving macroeconomic dynamics in DSGE frameworks.
+
+\section{Conclusion}
+This essay reproducts the standard RBC model with investment-efficiency shock, and examines whether adding this shock can improve the ability of a standard RBC model to match U.S. business-cycle data. The analysis compares the dynamic responses of output, consumption, investment, and hours under a TFP shock and an investment shock, and evaluates the model using unconditional moments from both simulations and the real world data.
+
+However, the model still cannot match key empirical patterns. In particular, it fails to reproduce both the overall size of business-cycle volatility and the relative volatility between investment, consumption, and output.
+These findings highlight a central limitation of frictionless RBC models: improving the shock structure alone is not enough to show the joint behavior of macroeconomic aggregates.
+
+Although the additional investment shock improves dynamics in some dimensions, it does not solve the deeper mismatch between the model and the data.
+This also leads to a broader methodological point: even if calibration makes the model fit the data better, it does not guarantee that the underlying structural mechanisms are correct.
+This concern is consistent with the arguments of Hansen and Heckman (1996) and Kim and Pagan (1999), who point out that calibration may hide structural problems instead of reflecting the true economic
+mechanisms.
+
+
+Overall, the contribution of this essay is that showing this limitation quantitatively. The results suggest that future research could focus not only on improving shock structures but also on developing more robust methods to validate the underlying mechanisms driving macroeconomic dynamics in DSGE frameworks.
+
+
+
+
+\begin{thebibliography}{}
+\bibitem{Christiano2005}
+Christiano, L.J., Eichenbaum, M. and Evans, C.L. (2005) 
+`Nominal rigidities and the dynamic effects of a shock to monetary policy',
+\textit{Journal of Political Economy}, 113(1), pp.~1--45.
+
+\bibitem{CogleyNason1995}
+Cogley, T. and Nason, J.M. (1995) ‘Output dynamics in real-business-cycle models’, \textit{The American Economic Review}, pp. 492–511.
+
+\bibitem{FagioloRoventini2012}
+Fagiolo, G. and Roventini, A. (2012) ‘Macroeconomic policy in DSGE and agent-based models’, \textit{Revue de l’OFCE}, 124(5), pp. 67–116.
+
+\bibitem{Gollin2002}
+Gollin, D. (2002) ‘Getting income shares right’, \textit{Journal of Political Economy}, 110(2), pp. 458–474.
+
+\bibitem{GommeRupert2007}
+Gomme, P. and Rupert, P. (2007) ‘Theory, measurement and calibration of macroeconomic models’, \textit{Journal of Monetary Economics}, 54(2), pp. 460–497.
+
+\bibitem{GreenwoodHercowitzHuffman1988}
+Greenwood, J., Hercowitz, Z. and Huffman, G.W. (1988) ‘Investment, capacity utilization, and the real business cycle’, \textit{The American Economic Review}, pp. 402–417.
+
+\bibitem{Hansen1985}
+Hansen, G.D. (1985) ‘Indivisible labor and the business cycle’, \textit{Journal of Monetary Economics}, 16(3), pp. 309–327.
+
+\bibitem{HansenHeckman1996}
+Hansen, L.P. and Heckman, J.J. (1996) ‘The empirical foundations of calibration’, \textit{Journal of Economic Perspectives}, 10(1), pp. 87–104.
+
+\bibitem{JustinianoPrimiceriTambalotti2010}
+Justiniano, A., Primiceri, G.E. and Tambalotti, A. (2010) ‘Investment shocks and business cycles’, \textit{Journal of Monetary Economics}, 57(2), pp. 132–145.
+
+\bibitem{Kaldor1961}
+Kaldor, N. (1961) ‘Capital accumulation and economic growth’, in \textit{The Theory of Capital}. London: Palgrave Macmillan UK, pp. 177–222.
+
+\bibitem{KimPagan1999}
+Kim, K. and Pagan, A.R. (1999) ‘The econometric analysis of calibrated macroeconomic models’, in \textit{Handbook of Applied Econometrics Volume 1: Macroeconomics}, pp. 309–338.
+
+\bibitem{KydlandPrescott1982}
+Kydland, F.E. and Prescott, E.C. (1982) ‘Time to build and aggregate fluctuations’, \textit{Econometrica}, pp. 1345–1370.
+
+\bibitem{Lucas1976}
+Lucas, R.E. Jr. (1976) ‘Econometric policy evaluation: A critique’, \textit{Carnegie-Rochester Conference Series on Public Policy}, 1, pp. 19–46.
+
+\bibitem{Phelps1961}
+Phelps, E. (1961) ‘The golden rule of accumulation: A fable for growthmen’, \textit{The American Economic Review}, 51(4), pp. 638–643.
+
+\bibitem{Prescott1986}
+Prescott, E.C. (1986) ‘Theory ahead of business-cycle measurement’, \textit{Carnegie-Rochester Conference Series on Public Policy}, 25, pp. 11–44.
+
+\bibitem{SmetsWouters2007}
+Smets, F. and Wouters, R. (2007) ‘Shocks and frictions in US business cycles: A Bayesian DSGE approach’, \textit{American Economic Review}, 97(3), pp. 586–606.
+
+\end{thebibliography}
+
+\newpage
+\appendix
+\section*{Appendix A: Both shocks .mod File}
+
+\verbatiminput{RBC_Investment1.mod}
+
+\appendix
+\section*{Appendix B: only a TFP shock .mod File}
+
+\verbatiminput{RBC_tfp.mod}
+
+\appendix
+\section*{Appendix C: display .mod File}
+
+\verbatiminput{display.m}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\end{document}
