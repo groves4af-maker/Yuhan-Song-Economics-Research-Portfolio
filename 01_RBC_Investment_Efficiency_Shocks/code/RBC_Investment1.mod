@@ -1,6 +1,3 @@
-// Investment Efficiency Shock (mu) and Total Factor Productivity (A) Shock.
-
-// Model based on Macro Coursework 2025-2026, Questions 4 and 5.
 
 // Endogenous Variables)
 var Y C K N I r W A mu 
@@ -53,44 +50,36 @@ W_ss = (1-alpha) * Y_ss / N_ss;
 
 
 model;
-// -------------------------------------------------------------
-// Structural Equations (7 equations: GE.1-GE.7)
-// -------------------------------------------------------------
 
-// 1. Euler Equation (GE.1)
+
+// 1. Euler Equation 
 1/C = beta * (mu/C(1)) * (r(1) + (1-delta)/mu(1));
 
-// 2. Labor Supply/Intratemporal Condition (GE.2)
+// 2. Labor Supply/Intratemporal Condition 
 b*N^varphi = W/C;
 
-// 3. Production Function (GE.5)
+// 3. Production Function 
 Y = A * K(-1)^alpha * N^(1-alpha);
 
-// 4. Capital Accumulation (GE.6)
+// 4. Capital Accumulation 
 K = (1-delta)*K(-1) + mu*I;
 
 // 5. Resource Constraint (GE.7, solved for I)
 Y = C + I; 
 
-// 6. Capital Demand / MPK (GE.3)
+// 6. Capital Demand / MPK 
 r = alpha * A * K(-1)^(alpha-1) * N^(1-alpha);
 
-// 7. Labor Demand / MPL (GE.4)
+// 7. Labor Demand / MPL 
 W = (1-alpha) * A * K(-1)^alpha * N^(-alpha);
 
-// -------------------------------------------------------------
-// Stochastic Processes (2 equations: GE.8-GE.9)
-// -------------------------------------------------------------
 
-// 8. TFP Shock Process (GE.8) - Linearised form for A around A_ss=1 (ln(A_ss)=0)
+// 8. TFP Shock Process  - Linearised form for A around A_ss=1 (ln(A_ss)=0)
 log(A) = rho_A * log(A(-1)) + eps_A; 
 
-// 9. Investment Shock Process (GE.9) - Linearised form for mu around mu_ss=1 (ln(mu_ss)=0)
+// 9. Investment Shock Process  - Linearised form for mu around mu_ss=1 (ln(mu_ss)=0)
 log(mu) = rho_mu * log(mu(-1)) + eps_mu;
 
-// -------------------------------------------------------------
-// Log-Deviation Definitions for Output (9 equations)'
-// -------------------------------------------------------------
 
 // All variables expressed in percent deviations from steady-state (e.g., 1% = 1),
 // except for the rental rate r which is annualized percentage point deviation.
